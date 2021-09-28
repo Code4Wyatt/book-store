@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.MyFooter {
+  position: relative;
+  bottom: 10px;
+  background-color: beige;
+  height: 100px;
+  margin-top: 30px;
+}
+
+.cards {
+  margin-bottom: 10px;
+  max-height: 700px;
+  
+}
+
+.cardBtns { 
+  max-width: 10px !important;
+  
+}
+
+.blurb-btn {
+  background-color:rgb(218, 234, 255) !important;
+  color: black !important;
+  margin-right: 10px;
+}
