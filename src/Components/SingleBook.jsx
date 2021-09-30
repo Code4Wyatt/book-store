@@ -13,7 +13,7 @@ class SingleBook extends React.Component {
 
   // create a function to listen the click if clicked set the state to true and render the comment area
   state = {
-    BookClicked: [],
+    selected: false,
   };
 
   render() {
