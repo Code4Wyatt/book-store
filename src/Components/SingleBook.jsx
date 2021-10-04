@@ -1,6 +1,5 @@
 import Card from "react-bootstrap/Card";
 import React from "react";
-import { Component } from "react";
 import CommentArea from './CommentArea';
 
 // class component
@@ -18,7 +17,8 @@ class SingleBook extends React.Component {
 
   render() {
     return (
-      <Card onClick="showComments()" style={{ width: "18rem" }}>
+      <Card onClick={() => this.setState({ selected: !this.state.selected })}
+        style = {{ border: this.state.selected ? '3px solid red' : 'none' }}>
         <Card.Img variant="top" src={this.props.book.img} />
         <Card.Body>
           <Card.Title>{this.props.book.title}</Card.Title>

@@ -1,12 +1,17 @@
-import React from "react";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+
+import CommentList from './CommentList'
+import AddComment from './AddComment'
+import Loading from './Loading'
+import Error from './Error'
+import React from 'react';
+
 
 class CommentArea extends React.Component {
 
     state = {
       comments: "",
-      
+      isLoading: true,
+      isError: false
     }
 
   //How to pass the server data to the children components
@@ -26,7 +31,7 @@ class CommentArea extends React.Component {
         "https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin,
         {
           headers: {
-            "Content-type": "application/json",
+            
             "Authorization":
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTFjZjllNzJkNTI2MjAwMTViNmRjYTIiLCJpYXQiOjE2MzMwMDUyOTQsImV4cCI6MTYzNDIxNDg5NH0.d_KfdGYMLP2cIvkIVTXXAEEsTnwwgbKEKlTIzOAU9uA",
           },
@@ -34,11 +39,15 @@ class CommentArea extends React.Component {
       );
       if (response.ok) {
         let data = await response.json()
-        console.log(data)
+        console.log(response)
         this.setState({
           comments: data,
-          
+          isLoading: false,
+          isError: false 
         })
+      } else {
+        console.log('error')
+        this.setState({ isLoading: false, isError: true })
       }
     } catch (err) {
       console.log(err.message);
@@ -51,20 +60,12 @@ class CommentArea extends React.Component {
 
     render() {
       return (
-        <Modal.Dialog >
-          <Modal.Header closeButton>
-            <Modal.Title>Comments</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <p>{this.state.comments}</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save changes</Button>
-          </Modal.Footer>
-        </Modal.Dialog >
+        <div>
+                {this.state.isLoading && <Loading />}
+                {this.state.isError && <Error />}
+                <AddComment asin={this.props.asin} />
+                <CommentList commentsToShow={this.state.comments} />
+        </div>
       )
     };
   };
