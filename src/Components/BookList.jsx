@@ -2,6 +2,7 @@ import React from 'react'
 import SingleBook from './SingleBook'
 import { Col, Container, Form, Row } from 'react-bootstrap'
 
+
 class BookList extends React.Component {
 
     state = {
@@ -11,6 +12,9 @@ class BookList extends React.Component {
     render() {
         return (
             <Container>
+                <div>
+                    <a href="/register"><p>Register</p></a>
+                </div>
                 <Row>
                     <Col>
                         <Form.Group controlId="formBasicEmail">
@@ -27,7 +31,7 @@ class BookList extends React.Component {
                 <Row>
                     {
                         this.props.books.filter(b => b.title.toLowerCase().includes(this.state.searchQuery)).map(b => (
-                            <Col xs={3}>
+                            <Col xs={3} key={b.asin} >
                                 <SingleBook book={b} />
                             </Col>
                         ))
